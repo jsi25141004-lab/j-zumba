@@ -729,8 +729,8 @@
 </head>
 <body>
 
-    <!-- BGM 오디오 소스 (로컬 z music.mp4 연동) -->
-    <audio id="bgm" src="z music.mp4" loop preload="auto"></audio>
+    <!-- BGM 오디오 소스 (모바일 자동 재생 호환을 위한 muted, autoplay, playsinline 속성 보강) -->
+    <audio id="bgm" src="z music.mp4" loop preload="auto" autoplay muted playsinline></audio>
 
     <!-- 배경 네온 파티클 이펙트 -->
     <div id="particles-container"></div>
@@ -1034,20 +1034,64 @@
             const intervalId = setInterval(update, 1000);
         }
 
-        // ----------------- [3. 자동재생 유도 로직] -----------------
+        // ----------------- [3. 하이브리드 모바일 자동재생 최적화 로직] -----------------
         const bgm = document.getElementById('bgm');
         const modal = document.getElementById('welcome-modal');
         const modalBtn = document.getElementById('modal-start-btn');
 
-        // [피드백 반영] 페이지 입장 시 사용자의 수동 클릭 Interaction을 사운드 재생과 연계하여 100% 자동 플레이 구현
+        // 모바일 및 PC 브라우저 자동재생 최적화 함수
+        function initAutoplay() {
+            // 1단계: 음소거(muted) 상태로 백그라운드 선행 재생 시도
+            bgm.muted = true;
+            
+            const playPromise = bgm.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    console.log("음소거 자동 재생 기동 성공! 첫 터치/스크롤 시 소리가 활성화됩니다.");
+                }).catch(err => {
+                    console.log("보안 차단으로 재생 보류. 첫 인터랙션을 기다립니다.");
+                });
+            }
+
+            // 2단계: 모바일 사용자의 미세한 상호작용(터치, 스크롤 등) 감지 시 즉시 음소거 해제 & 재생 보장
+            const unlockEvents = ['touchstart', 'click', 'scroll', 'touchmove', 'keydown'];
+            
+            function unlockAudio() {
+                bgm.muted = false;
+                // 저전력 모드나 정책 차단으로 일시정지 상태인 경우 강제 기동
+                if (bgm.paused) {
+                    bgm.play().then(() => {
+                        console.log("모바일 제약 해제 - BGM 재생 시작!");
+                    }).catch(err => console.log("재생 기동 에러:", err));
+                }
+                
+                // 불필요한 이벤트 리스너 제거
+                unlockEvents.forEach(evt => {
+                    window.removeEventListener(evt, unlockAudio, { passive: true });
+                    document.removeEventListener(evt, unlockAudio, { passive: true });
+                });
+            }
+
+            // 리스너 등록
+            unlockEvents.forEach(evt => {
+                window.addEventListener(evt, unlockAudio, { passive: true });
+                document.addEventListener(evt, unlockAudio, { passive: true });
+            });
+        }
+
+        // 웰컴 모달 버튼 클릭 시에도 완벽 작동 보장
         modalBtn.addEventListener('click', () => {
             modal.classList.remove('active');
+            bgm.muted = false;
             bgm.play().then(() => {
-                console.log("줌바 BGM 자동 재생 성공!");
+                console.log("모달 클릭 - 줌바 BGM 재생 성공!");
             }).catch(err => {
                 console.log("재생 오류 발생:", err);
             });
         });
+
+        // 모바일 자동재생 즉각 개시
+        initAutoplay();
 
         // ----------------- [4. 라인업 캐러셀 스크롤 & 인디케이터 도트] -----------------
         const carousel = document.getElementById('carousel');
