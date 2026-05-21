@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>열린금호 민트줌바 10주년기념 썸머파티 안내장</title>
+    <!-- 구글 폰트: 얇고 세련된 느낌의 Outfit과 Montserrat, 깔끔한 Noto Sans KR 연동 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Outfit:wght@200;300;400;500;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 1. 디자인 시스템 & 기본 스타일 초기화 */
+        :root {
+            --bg-color: #0c0822;
+            --bg-card: rgba(23, 17, 54, 0.7);
+            --primary-mint: #2effc6;
+            --primary-pink: #ff2e93;
+            --primary-yellow: #ffee38;
+            --text-main: #ffffff;
+            --text-sub: #b2afd0;
+            --neon-mint-shadow: 0 0 8px rgba(46, 255, 198, 0.5);
+            --neon-pink-shadow: 0 0 8px rgba(255, 46, 147, 0.5);
+            --neon-yellow-shadow: 0 0 8px rgba(255, 238, 56, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 10% 15%, rgba(255, 46, 147, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 90% 85%, rgba(46, 255, 198, 0.12) 0%, transparent 45%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            /* 한글 뭉개짐 현상을 없애기 위해 얇고 가독성 높은 산세리프 글자체 적용 */
+            font-family: 'Outfit', 'Noto Sans KR', sans-serif;
+            font-weight: 400;
+            letter-spacing: -0.3px;
+            overflow-x: hidden;
+            line-height: 1.6;
+            word-break: keep-all;
+        }
+
+        /* 2. 네온 파티클 배경 효과 */
+        #particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.4;
+            animation: floatUp 8s infinite linear;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(110vh) scale(0.3) rotate(0deg);
+                opacity: 0;
+            }
+            15% {
+                opacity: 0.5;
+            }
+            85% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* 3. 인트로 섹션 (Hero Area) */
+        .hero {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            overflow: hidden;
+            padding: 40px 20px 70px 20px;
+            z-index: 2;
+        }
+
+        /* 민트쌤 인물 이미지 원본 비율 보존 및 서서히 등장 */
+        .hero-bg-image {
+            position: absolute;
+            top: 5vh;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 420px;
+            height: 60vh;
+            object-fit: contain; /* 잘리지 않고 비율이 보존되도록 contain 설정 */
+            z-index: -1;
+            opacity: 0;
+            animation: fadeInHero 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeInHero {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(15px) scale(0.98);
+            }
+            to {
+                opacity: 0.9;
+                transform: translateX(-50%) translateY(0) scale(1);
+            }
+        }
+
+        /* 히어로 그라디언트 딤 */
+        .hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 65%;
+            background: linear-gradient(to top, var(--bg-color) 25%, rgba(12, 8, 34, 0.7) 65%, transparent 100%);
+            z-index: -1;
+        }
+
+        /* 로고/서브타이틀 */
+        .hero-top-badge {
+            background: rgba(255, 46, 147, 0.15);
+            border: 1px solid rgba(255, 46, 147, 0.4);
+            color: var(--primary-pink);
+            box-shadow: var(--neon-pink-shadow);
+            padding: 5px 14px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            animation: pulsePink 2.5s infinite alternate;
+        }
+
+        @keyframes pulsePink {
+            0% {
+                box-shadow: 0 0 4px rgba(255, 46, 147, 0.3);
+                transform: scale(1);
+            }
+            100% {
+                box-shadow: 0 0 12px rgba(255, 46, 147, 0.6);
+                transform: scale(1.02);
+            }
+        }
+
+        /* 메인 타이틀 - 글자 두께를 얇고 선명하게 다듬음 */
+        .hero-title-wrap {
+            text-align: center;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .hero-title-sub {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--primary-mint);
+            text-shadow: var(--neon-mint-shadow);
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .hero-title-main {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 500; /* 한글 뭉개짐 방지를 위해 너무 두껍지 않은 500 설정 */
+            font-size: 1.85rem;
+            line-height: 1.35;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-title-main span.accent {
+            color: var(--primary-yellow);
+            font-weight: 700; /* 포인트 단어만 700으로 가독성 보강 */
+            text-shadow: var(--neon-yellow-shadow);
+            display: inline-block;
+        }
+
+        /* 아래로 스크롤 지시자 */
+        .scroll-down {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-sub);
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-down svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--primary-mint);
+            filter: drop-shadow(0 0 3px rgba(46, 255, 198, 0.6));
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-6px); }
+            60% { transform: translateY(-3px); }
+        }
+
+        /* 4. 카운트다운 타이머 섹션 */
+        .section-countdown {
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .countdown-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-sub);
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .countdown-title::before, .countdown-title::after {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-mint));
+        }
+        .countdown-title::after {
+            background: linear-gradient(-90deg, transparent, var(--primary-mint));
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            max-width: 380px;
+        }
+
+        .countdown-card {
+            flex: 1;
+            background: var(--bg-card);
+            border: 1px solid rgba(46, 255, 198, 0.12);
+            border-radius: 14px;
+            padding: 12px 2px;
+            text-align: center;
+            box-shadow: inset 0 0 10px rgba(46, 255, 198, 0.03), 0 6px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .countdown-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-mint), var(--primary-pink));
+        }
+
+        .countdown-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.85rem;
+            font-weight: 500; /* 너무 두껍지 않고 선명한 굵기 */
+            color: var(--text-main);
+            text-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+            line-height: 1;
+            margin-bottom: 3px;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .countdown-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 500;
+            color: var(--primary-mint);
+            letter-spacing: 0.8px;
+        }
+
+        /* 5. 파티 상세 정보 섹션 */
+        .section-info {
+            padding: 30px 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, rgba(23, 17, 54, 0.85) 0%, rgba(12, 8, 34, 0.95) 100%);
+            border: 1px solid rgba(255, 46, 147, 0.2);
+            border-radius: 20px;
+            padding: 25px 20px;
+            box-shadow: var(--neon-pink-shadow), 0 8px 30px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-header {
+            text-align: center;
+            margin-bottom: 22px;
+        }
+
+        .info-badge {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--primary-pink), rgba(255, 46, 147, 0.6));
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 500;
+            padding: 3px 12px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .info-card-title {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 500;
+            font-size: 1.4rem;
+            color: #ffffff;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .info-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .info-icon {
+            flex-shrink: 0;
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: rgba(46, 255, 198, 0.08);
+            border: 1px solid rgba(46, 255, 198, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .info-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--primary-mint);
+        }
+
+        .info-content {
+            flex-grow: 1;
+        }
+
+        .info-label {
+            font-size: 0.75rem;
+            color: var(--text-sub);
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .info-value {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        .info-value span.accent {
+            color: var(--primary-mint);
+            font-weight: 700;
+        }
+
+        /* 6. 라인업/출연진 섹션 */
+        .section-lineup {
+            padding: 30px 0 50px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title-area {
+            padding: 0 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .lineup-badge {
+            color: var(--primary-pink);
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .lineup-title {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 500;
+            font-size: 1.7rem;
+            color: var(--text-main);
+        }
+
+        /* 가로 스와이프 캐러셀 컨테이너 */
+        .lineup-carousel-container {
+            width: 100%;
+            overflow-x: auto;
+            padding: 10px 20px 25px 20px;
+            display: flex;
+            gap: 16px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .lineup-carousel-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* 팀소개 카드 */
+        .team-card {
+            flex: 0 0 270px;
+            scroll-snap-align: center;
+            background: linear-gradient(180deg, rgba(20, 15, 48, 0.85) 0%, rgba(10, 7, 30, 0.95) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+        }
+
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 16px;
+            border: 1.2px solid transparent;
+            background: linear-gradient(to bottom, var(--primary-mint), var(--primary-pink)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            opacity: 0.15;
+            transition: opacity 0.3s;
+        }
+
+        .team-card.active {
+            transform: translateY(-5px);
+            border-color: rgba(46, 255, 198, 0.2);
+            box-shadow: 0 15px 30px rgba(46, 255, 198, 0.1);
+        }
+
+        .team-card.active::before {
+            opacity: 0.6;
+        }
+
+        /* [핵심 피드백] 이미지 원본 비율 보존을 위한 리사이즈 & 정렬 프레임 */
+        .team-img-wrapper {
+            width: 100%;
+            height: 250px; /* 높이를 일정하게 두되 이미지가 잘리지 않게 조정 */
+            overflow: hidden;
+            position: relative;
+            background-color: #060314;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px; /* 내부에 약간의 패딩을 주어 이미지가 완전체로 보이도록 유도 */
+        }
+
+        .team-img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain; /* [피드백 반영] 절대 이미지가 잘리지 않도록 원본 비율 보존 */
+            border-radius: 8px;
+            transition: transform 0.4s ease;
+        }
+
+        .team-card.active .team-img {
+            transform: scale(1.03);
+        }
+
+        /* 카드 그라디언트 딤 효과 완화 */
+        .team-img-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 20%;
+            background: linear-gradient(to top, rgba(10, 7, 30, 0.8) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        /* 팀 정보 */
+        .team-info {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            z-index: 1;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .team-name {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 500;
+            font-size: 1.15rem;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .team-name-emoji {
+            font-size: 1.1rem;
+        }
+
+        .team-members-title {
+            font-size: 0.65rem;
+            font-weight: 500;
+            color: var(--primary-mint);
+            text-shadow: var(--neon-mint-shadow);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .team-members {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            line-height: 1.45;
+            font-weight: 400;
+        }
+
+        /* 스와이프 지시자 닷 */
+        .carousel-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            margin-top: 6px;
+        }
+
+        .indicator-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .indicator-dot.active {
+            width: 15px;
+            border-radius: 10px;
+            background-color: var(--primary-mint);
+            box-shadow: var(--neon-mint-shadow);
+        }
+
+        /* 7. 입장 및 자동재생 활성화 유도 팝업 */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(8, 5, 24, 0.94);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #161038 0%, #0a0720 100%);
+            border: 1px solid rgba(46, 255, 198, 0.35);
+            box-shadow: var(--neon-mint-shadow), 0 10px 40px rgba(0,0,0,0.6);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 320px;
+            padding: 30px 20px;
+            text-align: center;
+            transform: scale(0.92);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-icon {
+            width: 52px;
+            height: 52px;
+            background: rgba(46, 255, 198, 0.08);
+            border: 1px solid rgba(46, 255, 198, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px auto;
+            box-shadow: var(--neon-mint-shadow);
+        }
+
+        .modal-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--primary-mint);
+            animation: pulseIcon 1.5s infinite alternate;
+        }
+
+        @keyframes pulseIcon {
+            0% { transform: scale(0.95); }
+            100% { transform: scale(1.1); }
+        }
+
+        .modal-title {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 500;
+            font-size: 1.45rem;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .modal-desc {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        /* 파티 시작 버튼 */
+        .modal-btn {
+            background: linear-gradient(90deg, var(--primary-mint) 0%, #15e1aa 100%);
+            color: #0b071e;
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: var(--neon-mint-shadow);
+            transition: all 0.3s;
+            width: 100%;
+            letter-spacing: 0.5px;
+        }
+
+        .modal-btn:active {
+            transform: scale(0.97);
+        }
+
+        /* 8. 푸터 */
+        footer {
+            padding: 35px 20px;
+            text-align: center;
+            background-color: rgba(4, 2, 12, 0.95);
+            border-top: 1px solid rgba(255,255,255,0.02);
+            color: var(--text-sub);
+            font-size: 0.7rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 1rem;
+            color: var(--primary-mint);
+            text-shadow: var(--neon-mint-shadow);
+            margin-bottom: 6px;
+        }
+        
+        @media (max-width: 340px) {
+            .hero-title-main {
+                font-size: 1.6rem;
+            }
+            .countdown-value {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BGM 오디오 소스 (로컬 z music.mp4 연동) -->
+    <audio id="bgm" src="z music.mp4" loop preload="auto"></audio>
+
+    <!-- 배경 네온 파티클 이펙트 -->
+    <div id="particles-container"></div>
+
+    <!-- 1. Hero Section -->
+    <section class="hero">
+        <!-- 민트쌤 메인 비주얼 이미지 (잘리지 않게 contain 적용) -->
+        <img src="pictures/민트 쌤.png" alt="민트 쌤" class="hero-bg-image" onerror="this.src='pictures/%EB%AF%BC%ED%8A%B8%20%EC%8C%A4.png'">
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-top-badge">10TH ANNIVERSARY</div>
+        <div class="hero-title-wrap">
+            <p class="hero-title-sub">MINT ZUMBA SUMMER PARTY</p>
+            <h1 class="hero-title-main">열린금호 민트줌바<br><span class="accent">10주년기념 썸머파티</span></h1>
+        </div>
+
+        <div class="scroll-down">
+            <span>SCROLL DOWN</span>
+            <svg viewBox="0 0 24 24">
+                <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- 2. Countdown Section -->
+    <section class="section-countdown">
+        <div class="countdown-title">PARTY COUNTDOWN</div>
+        <div class="countdown-container">
+            <div class="countdown-card">
+                <div class="countdown-value" id="days">00</div>
+                <div class="countdown-label">DAYS</div>
+            </div>
+            <div class="countdown-card">
+                <div class="countdown-value" id="hours">00</div>
+                <div class="countdown-label">HOURS</div>
+            </div>
+            <div class="countdown-card">
+                <div class="countdown-value" id="minutes">00</div>
+                <div class="countdown-label">MIN</div>
+            </div>
+            <div class="countdown-card">
+                <div class="countdown-value" id="seconds">00</div>
+                <div class="countdown-label">SEC</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Event Detail Info Card -->
+    <section class="section-info">
+        <div class="info-card">
+            <div class="info-header">
+                <span class="info-badge">INVITATION</span>
+                <h2 class="info-card-title">파티 상세 안내</h2>
+            </div>
+            
+            <div class="info-item">
+                <div class="info-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h5v5h-5z"/>
+                    </svg>
+                </div>
+                <div class="info-content">
+                    <div class="info-label">DATE & TIME</div>
+                    <div class="info-value">2026. <span class="accent">6. 27</span> 토요일</div>
+                    <div class="info-value" style="font-size: 0.85rem; color: var(--text-sub); margin-top: 2px;">오후 3시 ~ 5시 (3:00 - 5:00 PM)</div>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                </div>
+                <div class="info-content">
+                    <div class="info-label">LOCATION</div>
+                    <div class="info-value">약수 진네이션 스튜디오</div>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                </div>
+                <div class="info-content">
+                    <div class="info-label">DRESS CODE & PREPARATIONS</div>
+                    <div class="info-value">시원하고 에너제틱한 썸머 페스티벌 룩!</div>
+                    <div class="info-value" style="font-size: 0.8rem; margin-top: 3px; color: var(--text-sub);">
+                        🎁 개인 텀블러, 실내용 운동화, 열정적인 마음
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Lineup / Teams Section -->
+    <section class="section-lineup">
+        <div class="section-title-area">
+            <span class="lineup-badge">LINEUP</span>
+            <h2 class="lineup-title">참가 팀 소개</h2>
+        </div>
+
+        <!-- 가로 스냅 스와이프 캐러셀 -->
+        <div class="lineup-carousel-container" id="carousel">
+            <!-- 1. Glam Pink -->
+            <div class="team-card">
+                <div class="team-img-wrapper">
+                    <!-- 원본 비율 완벽 보존 처리 -->
+                    <img src="pictures/Glam Pink.png" alt="지핑크[Glam Pink]" class="team-img" onerror="this.src='pictures/Glam%20Pink.png'">
+                    <div class="team-img-overlay"></div>
+                </div>
+                <div class="team-info">
+                    <h3 class="team-name"><span class="team-name-emoji">😀</span> Glam Pink</h3>
+                    <div class="team-members-title">MEMBERS</div>
+                    <p class="team-members">박경화, 문민경, 박선영, 최경미</p>
+                </div>
+            </div>
+
+            <!-- 2. All Day Zumba -->
+            <div class="team-card">
+                <div class="team-img-wrapper">
+                    <img src="pictures/All Day Zumba.png" alt="올데이줌바(All Day Zumba)" class="team-img" onerror="this.src='pictures/All%20Day%20Zumba.png'">
+                    <div class="team-img-overlay"></div>
+                </div>
+                <div class="team-info">
+                    <h3 class="team-name"><span class="team-name-emoji">😀</span> All Day Zumba</h3>
+                    <div class="team-members-title">MEMBERS</div>
+                    <p class="team-members">김미라, 김희선, 안은하, 이은지, 김윤정</p>
+                </div>
+            </div>
+
+            <!-- 3. Hi Five -->
+            <div class="team-card">
+                <div class="team-img-wrapper">
+                    <img src="pictures/Hi Five.png" alt="Hi Five" class="team-img" onerror="this.src='pictures/Hi%20Five.png'">
+                    <div class="team-img-overlay"></div>
+                </div>
+                <div class="team-info">
+                    <h3 class="team-name"><span class="team-name-emoji">😀</span> Hi Five</h3>
+                    <div class="team-members-title">MEMBERS</div>
+                    <p class="team-members">김미순, 이혜숙, 정경화, 표호정, 오현정</p>
+                </div>
+            </div>
+
+            <!-- 4. J.S.I. 정상인 -->
+            <div class="team-card">
+                <div class="team-img-wrapper">
+                    <img src="pictures/J.S.I..png" alt="J.S.I. (Just solo it) 정상인" class="team-img" onerror="this.src='pictures/J.S.I..png'">
+                    <div class="team-img-overlay"></div>
+                </div>
+                <div class="team-info">
+                    <h3 class="team-name"><span class="team-name-emoji">😀</span> J.S.I</h3>
+                    <div class="team-members-title">MEMBERS</div>
+                    <p class="team-members">정상인</p>
+                </div>
+            </div>
+
+            <!-- 5. Zumba Holic -->
+            <div class="team-card">
+                <div class="team-img-wrapper">
+                    <img src="pictures/Zumba Holic.png" alt="줌바홀릭(Zumba Holic)" class="team-img" onerror="this.src='pictures/Zumba%20Holic.png'">
+                    <div class="team-img-overlay"></div>
+                </div>
+                <div class="team-info">
+                    <h3 class="team-name"><span class="team-name-emoji">😀</span> Zumba Holic</h3>
+                    <div class="team-members-title">MEMBERS</div>
+                    <p class="team-members">김성미, 이상미, 김은경, 임현정, 한신영</p>
+                </div>
+            </div>
+
+            <!-- 6. Zumba & Grace -->
+            <div class="team-card">
+                <div class="team-img-wrapper">
+                    <img src="pictures/Zumba & Grace).png" alt="줌바엔그레이스(Zumba & Grace)" class="team-img" onerror="this.src='pictures/Zumba%20&%20Grace%29.png'">
+                    <div class="team-img-overlay"></div>
+                </div>
+                <div class="team-info">
+                    <h3 class="team-name"><span class="team-name-emoji">😀</span> Zumba & Grace</h3>
+                    <div class="team-members-title">MEMBERS</div>
+                    <p class="team-members">이정숙, 김도선, 이수영, 박순영</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 슬라이드 인디케이터 도트 -->
+        <div class="carousel-indicator" id="dots-container"></div>
+    </section>
+
+    <!-- [피드백 반영] 하단의 번잡한 '음악 켜기' 플로팅 버튼 마크업은 영구 삭제함 -->
+
+    <!-- 입장 시 줌바 음악 자동 재생을 위한 터치 유도 오프닝 팝업 -->
+    <div class="modal active" id="welcome-modal">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                </svg>
+            </div>
+            <h3 class="modal-title">민트줌바 파티 초대장</h3>
+            <p class="modal-desc">10주년 썸머파티에 여러분을 초대합니다!<br>아래 버튼을 터치하여 신나는 라틴 음악과 함께 파티 안내장을 열어보세요! 🎵</p>
+            <button class="modal-btn" id="modal-start-btn">파티 음악과 함께 열기 💃</button>
+        </div>
+    </div>
+
+    <!-- 7. Footer -->
+    <footer>
+        <div class="footer-logo">MINT ZUMBA</div>
+        <p>열린금호 민트줌바 10주년기념 썸머파티</p>
+        <p style="margin-top: 15px; opacity: 0.35; font-size: 0.65rem;">© 2026 MINT ZUMBA. All Rights Reserved.</p>
+    </footer>
+
+    <!-- 8. JavaScript 로직 -->
+    <script>
+        // ----------------- [1. 배경 파티클 메이커] -----------------
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            const colors = ['#2effc6', '#ff2e93', '#ffee38', '#ffffff'];
+            const maxParticles = 20;
+
+            for (let i = 0; i < maxParticles; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                const size = Math.random() * 6 + 3;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}vw`;
+                
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.backgroundColor = color;
+                particle.style.boxShadow = `0 0 8px ${color}`;
+                
+                particle.style.animationDuration = `${Math.random() * 5 + 6}s`;
+                particle.style.animationDelay = `${Math.random() * 4}s`;
+                
+                container.appendChild(particle);
+            }
+        }
+
+        // ----------------- [2. 카운트다운 타이머 로직] -----------------
+        function startCountdown() {
+            // 행사 목표 일시: 2026.06.27 오후 3시 (KST = UTC+9)
+            const targetDate = new Date('2026-06-27T15:00:00+09:00').getTime();
+
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minutesEl = document.getElementById('minutes');
+            const secondsEl = document.getElementById('seconds');
+
+            function update() {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+
+                if (distance < 0) {
+                    daysEl.innerText = "00";
+                    hoursEl.innerText = "00";
+                    minutesEl.innerText = "00";
+                    secondsEl.innerText = "00";
+                    clearInterval(intervalId);
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                const dStr = days.toString().padStart(2, '0');
+                const hStr = hours.toString().padStart(2, '0');
+                const mStr = minutes.toString().padStart(2, '0');
+                const sStr = seconds.toString().padStart(2, '0');
+
+                if (daysEl.innerText !== dStr) {
+                    daysEl.innerText = dStr;
+                    animateCard(daysEl);
+                }
+                if (hoursEl.innerText !== hStr) {
+                    hoursEl.innerText = hStr;
+                    animateCard(hoursEl);
+                }
+                if (minutesEl.innerText !== mStr) {
+                    minutesEl.innerText = mStr;
+                    animateCard(minutesEl);
+                }
+                if (secondsEl.innerText !== sStr) {
+                    secondsEl.innerText = sStr;
+                    animateCard(secondsEl);
+                }
+            }
+
+            function animateCard(el) {
+                el.style.transform = 'scale(0.85)';
+                setTimeout(() => {
+                    el.style.transform = 'scale(1)';
+                }, 180);
+            }
+
+            update();
+            const intervalId = setInterval(update, 1000);
+        }
+
+        // ----------------- [3. 자동재생 유도 로직] -----------------
+        const bgm = document.getElementById('bgm');
+        const modal = document.getElementById('welcome-modal');
+        const modalBtn = document.getElementById('modal-start-btn');
+
+        // [피드백 반영] 페이지 입장 시 사용자의 수동 클릭 Interaction을 사운드 재생과 연계하여 100% 자동 플레이 구현
+        modalBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+            bgm.play().then(() => {
+                console.log("줌바 BGM 자동 재생 성공!");
+            }).catch(err => {
+                console.log("재생 오류 발생:", err);
+            });
+        });
+
+        // ----------------- [4. 라인업 캐러셀 스크롤 & 인디케이터 도트] -----------------
+        const carousel = document.getElementById('carousel');
+        const dotsContainer = document.getElementById('dots-container');
+        const cards = document.querySelectorAll('.team-card');
+        const dotElements = [];
+
+        cards.forEach((_, idx) => {
+            const dot = document.createElement('div');
+            dot.classList.add('indicator-dot');
+            if (idx === 0) dot.classList.add('active');
+            dotsContainer.appendChild(dot);
+            dotElements.push(dot);
+
+            dot.addEventListener('click', () => {
+                const cardWidth = cards[0].offsetWidth + 16; // 16은 gap
+                carousel.scrollTo({
+                    left: idx * cardWidth,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        carousel.addEventListener('scroll', () => {
+            const scrollLeft = carousel.scrollLeft;
+            const cardWidth = cards[0].offsetWidth + 16;
+            const activeIndex = Math.round(scrollLeft / cardWidth);
+
+            dotElements.forEach((dot, idx) => {
+                if (idx === activeIndex) {
+                    dot.classList.add('active');
+                    cards[idx].classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                    cards[idx].classList.remove('active');
+                }
+            });
+        });
+
+        if (cards.length > 0) cards[0].classList.add('active');
+
+        // ----------------- [5. 스크롤 페이드인 모션] -----------------
+        const observerOptions = {
+            threshold: 0.08,
+            rootMargin: "0px 0px -40px 0px"
+        };
+
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0) scale(1)';
+                    scrollObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const animatedSections = [
+            document.querySelector('.section-countdown'),
+            document.querySelector('.info-card'),
+            document.querySelector('.section-title-area')
+        ];
+
+        animatedSections.forEach(sec => {
+            if (sec) {
+                sec.style.opacity = '0';
+                sec.style.transform = 'translateY(25px) scale(0.97)';
+                sec.style.transition = 'all 0.7s cubic-bezier(0.16, 1, 0.3, 1)';
+                scrollObserver.observe(sec);
+            }
+        });
+
+        // ----------------- [6. 초기화] -----------------
+        window.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            startCountdown();
+        });
+    </script>
+</body>
+</html>
