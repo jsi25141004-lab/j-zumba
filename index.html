@@ -726,57 +726,117 @@
             }
         }
 
-        /* 9. 이미지 라이트박스 확대 모달 */
+        /* 9. 뮤직 플레이어 오버레이 및 미니 이퀄라이저 */
         .team-img-wrapper {
-            cursor: zoom-in; /* 클릭해서 확대 가능함을 마우스 커서로 제공 */
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
         }
 
-        .lightbox {
-            position: fixed;
+        .music-overlay {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(4, 2, 12, 0.94);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            z-index: 3000; /* 웰컴 모달(1000)보다 높게 설정 */
+            background: rgba(10, 7, 30, 0.88);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            cursor: zoom-out;
+            transition: all 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 10;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
         }
 
-        .lightbox.active {
+        .music-overlay.active {
             opacity: 1;
             pointer-events: auto;
         }
 
-        .lightbox-img-wrap {
-            max-width: 95%;
-            max-height: 88%;
+        .music-status-tag {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.65rem;
+            color: var(--primary-mint);
+            text-shadow: var(--neon-mint-shadow);
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            animation: musicBlink 1.5s infinite alternate;
+        }
+
+        @keyframes musicBlink {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .music-title-text {
+            font-family: 'Montserrat', 'Noto Sans KR', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.35;
+            letter-spacing: -0.3px;
+            margin-bottom: 16px;
+            word-break: keep-all;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+        }
+
+        /* 춤추는 미니 이퀄라이저 */
+        .mini-equalizer {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
+            align-items: flex-end;
+            gap: 4px;
+            height: 20px;
         }
 
-        .lightbox img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            border-radius: 12px;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transform: scale(0.92);
-            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+        .mini-equalizer span {
+            display: block;
+            width: 3.5px;
+            background-color: var(--primary-pink);
+            box-shadow: var(--neon-pink-shadow);
+            border-radius: 2px;
+            animation: bounceBar 0.8s infinite alternate;
+            height: 3px;
         }
 
-        .lightbox.active img {
-            transform: scale(1);
+        .mini-equalizer span:nth-child(2) {
+            animation-duration: 0.5s;
+            animation-delay: 0.15s;
+            background-color: var(--primary-mint);
+            box-shadow: var(--neon-mint-shadow);
+        }
+
+        .mini-equalizer span:nth-child(3) {
+            animation-duration: 0.7s;
+            animation-delay: 0.3s;
+            background-color: var(--primary-yellow);
+            box-shadow: var(--neon-yellow-shadow);
+        }
+
+        .mini-equalizer span:nth-child(4) {
+            animation-duration: 0.6s;
+            animation-delay: 0.05s;
+            background-color: var(--primary-pink);
+            box-shadow: var(--neon-pink-shadow);
+        }
+
+        @keyframes bounceBar {
+            0% { height: 3px; }
+            100% { height: 20px; }
+        }
+
+        /* 오디오가 일시 정지(paused) 상태일 때 이퀄라이저 애니메이션 일시 중지 */
+        .music-overlay.paused .mini-equalizer span {
+            animation-play-state: paused;
+            height: 4px !important;
         }
     </style>
 </head>
@@ -848,7 +908,7 @@
                 <div class="info-content">
                     <div class="info-label">DATE & TIME</div>
                     <div class="info-value">2026. <span class="accent">6. 27</span> 토요일</div>
-                    <div class="info-value" style="font-size: 0.85rem; color: var(--text-sub); margin-top: 2px;">오후 3시 ~ 5시 (3:00 - 5:00 PM)</div>
+                    <div class="info-value" style="font-size: 0.85rem; color: var(--text-sub); margin-top: 2px;">3:00 - 5:00 PM</div>
                 </div>
             </div>
 
@@ -891,11 +951,19 @@
         <!-- 가로 스냅 스와이프 캐러셀 -->
         <div class="lineup-carousel-container" id="carousel">
             <!-- 1. Glam Pink -->
-            <div class="team-card">
+            <div class="team-card" data-music="Shagidi.mp3" data-title="Shagidi">
                 <div class="team-img-wrapper">
                     <!-- 원본 비율 완벽 보존 처리 -->
                     <img src="pictures/Glam Pink.png" alt="지핑크[Glam Pink]" class="team-img" onerror="this.src='pictures/Glam%20Pink.png'">
                     <div class="team-img-overlay"></div>
+                    <!-- 음악 플레이 오버레이 -->
+                    <div class="music-overlay">
+                        <span class="music-status-tag">NOW PLAYING 🎵</span>
+                        <span class="music-title-text">Shagidi</span>
+                        <div class="mini-equalizer">
+                            <span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
                 </div>
                 <div class="team-info">
                     <h3 class="team-name"><span class="team-name-emoji">😀</span> Glam Pink</h3>
@@ -905,10 +973,17 @@
             </div>
 
             <!-- 2. All Day Zumba -->
-            <div class="team-card">
+            <div class="team-card" data-music="Zumba Shake.mp3" data-title="Zumba Shake">
                 <div class="team-img-wrapper">
                     <img src="pictures/All Day Zumba.png" alt="올데이줌바(All Day Zumba)" class="team-img" onerror="this.src='pictures/All%20Day%20Zumba.png'">
                     <div class="team-img-overlay"></div>
+                    <div class="music-overlay">
+                        <span class="music-status-tag">NOW PLAYING 🎵</span>
+                        <span class="music-title-text">Zumba Shake</span>
+                        <div class="mini-equalizer">
+                            <span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
                 </div>
                 <div class="team-info">
                     <h3 class="team-name"><span class="team-name-emoji">😀</span> All Day Zumba</h3>
@@ -918,10 +993,17 @@
             </div>
 
             <!-- 3. Hi Five -->
-            <div class="team-card">
+            <div class="team-card" data-music="New York Night.mp3" data-title="New York Night">
                 <div class="team-img-wrapper">
                     <img src="pictures/Hi Five.png" alt="Hi Five" class="team-img" onerror="this.src='pictures/Hi%20Five.png'">
                     <div class="team-img-overlay"></div>
+                    <div class="music-overlay">
+                        <span class="music-status-tag">NOW PLAYING 🎵</span>
+                        <span class="music-title-text">New York Night</span>
+                        <div class="mini-equalizer">
+                            <span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
                 </div>
                 <div class="team-info">
                     <h3 class="team-name"><span class="team-name-emoji">😀</span> Hi Five</h3>
@@ -931,10 +1013,17 @@
             </div>
 
             <!-- 4. J.S.I. 정상인 -->
-            <div class="team-card">
+            <div class="team-card" data-music="NO TOQUES MI CORAZON.mp3" data-title="NO TOQUES MI CORAZON">
                 <div class="team-img-wrapper">
                     <img src="pictures/J.S.I..png" alt="J.S.I. (Just solo it) 정상인" class="team-img" onerror="this.src='pictures/J.S.I..png'">
                     <div class="team-img-overlay"></div>
+                    <div class="music-overlay">
+                        <span class="music-status-tag">NOW PLAYING 🎵</span>
+                        <span class="music-title-text">NO TOQUES MI CORAZON</span>
+                        <div class="mini-equalizer">
+                            <span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
                 </div>
                 <div class="team-info">
                     <h3 class="team-name"><span class="team-name-emoji">😀</span> J.S.I</h3>
@@ -944,10 +1033,17 @@
             </div>
 
             <!-- 5. Zumba Holic -->
-            <div class="team-card">
+            <div class="team-card" data-music="Concentrate.m4a" data-fallback="Preparense.m4a" data-title="Concentrate">
                 <div class="team-img-wrapper">
                     <img src="pictures/Zumba Holic.png" alt="줌바홀릭(Zumba Holic)" class="team-img" onerror="this.src='pictures/Zumba%20Holic.png'">
                     <div class="team-img-overlay"></div>
+                    <div class="music-overlay">
+                        <span class="music-status-tag">NOW PLAYING 🎵</span>
+                        <span class="music-title-text">Concentrate</span>
+                        <div class="mini-equalizer">
+                            <span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
                 </div>
                 <div class="team-info">
                     <h3 class="team-name"><span class="team-name-emoji">😀</span> Zumba Holic</h3>
@@ -957,10 +1053,17 @@
             </div>
 
             <!-- 6. Zumba & Grace -->
-            <div class="team-card">
+            <div class="team-card" data-music="Concentrate.mp3" data-title="Concentrate">
                 <div class="team-img-wrapper">
                     <img src="pictures/Zumba & Grace).png" alt="줌바엔그레이스(Zumba & Grace)" class="team-img" onerror="this.src='pictures/Zumba%20&%20Grace%29.png'">
                     <div class="team-img-overlay"></div>
+                    <div class="music-overlay">
+                        <span class="music-status-tag">NOW PLAYING 🎵</span>
+                        <span class="music-title-text">Concentrate</span>
+                        <div class="mini-equalizer">
+                            <span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
                 </div>
                 <div class="team-info">
                     <h3 class="team-name"><span class="team-name-emoji">😀</span> Zumba & Grace</h3>
@@ -973,15 +1076,6 @@
         <!-- 슬라이드 인디케이터 도트 -->
         <div class="carousel-indicator" id="dots-container"></div>
     </section>
-
-    <!-- [피드백 반영] 하단의 번잡한 '음악 켜기' 플로팅 버튼 마크업은 영구 삭제함 -->
-
-    <!-- 이미지 전체화면 확대 라이트박스 모달 -->
-    <div id="image-lightbox" class="lightbox">
-        <div class="lightbox-img-wrap">
-            <img id="lightbox-img" src="" alt="팀 포스터 확대 이미지">
-        </div>
-    </div>
 
     <!-- 입장 시 줌바 음악 자동 재생을 위한 터치 유도 오프닝 팝업 -->
     <div class="modal active" id="welcome-modal">
@@ -1224,24 +1318,80 @@
             }
         });
 
-        // ----------------- [6. 이미지 라이트박스 확대/축소 로직] -----------------
-        const lightbox = document.getElementById('image-lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const teamImages = document.querySelectorAll('.team-img');
+        // ----------------- [6. 각 팀별 포스터 클릭 시 전용 음원 재생 및 오버레이 로직] -----------------
+        let activeTeamPlayer = null; // 현재 활성화된 팀 전용 오디오 객체
+        let activeCard = null;       // 현재 재생 중인 팀 카드 요소
 
-        teamImages.forEach(img => {
-            img.addEventListener('click', (e) => {
-                e.stopPropagation(); // 스와이프 캐러셀 터치 이벤트와 충돌하지 않도록 이벤트 전파 차단
-                lightboxImg.src = img.src;
-                lightbox.classList.add('active');
+        const teamCards = document.querySelectorAll('.team-card');
+
+        teamCards.forEach(card => {
+            const imgWrapper = card.querySelector('.team-img-wrapper');
+            const overlay = card.querySelector('.music-overlay');
+            const musicSrc = card.getAttribute('data-music');
+            const fallbackSrc = card.getAttribute('data-fallback');
+            const songTitle = card.getAttribute('data-title');
+
+            if (!imgWrapper || !musicSrc) return;
+
+            imgWrapper.addEventListener('click', (e) => {
+                e.stopPropagation(); // 캐러셀 터치 스크롤 이벤트와의 겹침 차단
+
+                // 1단계: 메인 BGM (zmusic.mp4)을 즉시 일시 정지하여 소리 겹침 현상 원천 방지
+                if (!bgm.paused) {
+                    bgm.pause();
+                }
+
+                // 2단계: 동일한 포스터를 다시 터치한 경우 -> 토글 일시 정지 (Play/Pause)
+                if (activeCard === card) {
+                    if (activeTeamPlayer && !activeTeamPlayer.paused) {
+                        activeTeamPlayer.pause();
+                        overlay.classList.add('paused'); // 이퀄라이저 막대 멈춤
+                    } else if (activeTeamPlayer) {
+                        activeTeamPlayer.play().catch(err => console.log("재생 실패:", err));
+                        overlay.classList.remove('paused');
+                    }
+                    return;
+                }
+
+                // 3단계: 다른 포스터가 재생 중이었던 경우 -> 이전 음악 정지 및 오버레이 해제
+                if (activeTeamPlayer) {
+                    activeTeamPlayer.pause();
+                    activeTeamPlayer = null;
+                }
+                if (activeCard) {
+                    const prevOverlay = activeCard.querySelector('.music-overlay');
+                    if (prevOverlay) {
+                        prevOverlay.classList.remove('active');
+                        prevOverlay.classList.remove('paused');
+                    }
+                }
+
+                // 4단계: 신규 전용 오디오 객체 생성 및 플레이어 활성화
+                activeCard = card;
+                overlay.classList.add('active');
+                overlay.classList.remove('paused');
+
+                activeTeamPlayer = new Audio(musicSrc);
+                activeTeamPlayer.loop = true;
+
+                // [안전망] Zumba Holic의 Concentrate.m4a 파일이 없을 경우, 폴더 내 Preparense.m4a 파일로 자동 우회
+                if (fallbackSrc) {
+                    activeTeamPlayer.addEventListener('error', function onError() {
+                        console.warn(`${musicSrc} 로딩 실패. 폴백 음원 ${fallbackSrc}로 우회하여 자동 재생합니다.`);
+                        activeTeamPlayer.src = fallbackSrc;
+                        activeTeamPlayer.load();
+                        activeTeamPlayer.play().catch(err => console.log("폴백 재생 실패:", err));
+                        activeTeamPlayer.removeEventListener('error', onError);
+                    });
+                }
+
+                // 새 곡 재생 개시
+                activeTeamPlayer.play().then(() => {
+                    console.log(`팀 전용 음원 재생 시작: ${songTitle}`);
+                }).catch(err => {
+                    console.error("음악 재생 오류:", err);
+                });
             });
-        });
-
-        lightbox.addEventListener('click', () => {
-            lightbox.classList.remove('active');
-            setTimeout(() => {
-                lightboxImg.src = ''; // 닫힌 후 소스 클리어하여 잔상 제거
-            }, 350);
         });
 
         // ----------------- [7. 초기화] -----------------
